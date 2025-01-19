@@ -1,7 +1,7 @@
 # build
 build: encoder.c decoder.c
-	gcc encoder.c headerInfo.c pixeldata.c testouput.c mathCalculation.c sort.c huffmanEncoding.c -o encoder.exe -lm
-	gcc decoder.c headerInfo.c pixeldata.c testouput.c mathCalculation.c sort.c huffmanDecoding.c -o decoder.exe -lm
+	gcc encoder.c headerInfo.c pixeldata.c testouput.c mathCalculation.c sort.c runLengthCoding.c huffmanEncoding.c encoderMemory.c -o encoder.exe -lm
+	gcc decoder.c headerInfo.c pixeldata.c testouput.c mathCalculation.c sort.c runLengthCoding.c huffmanDecoding.c decoderMemory.c -o decoder.exe -lm
 
 # ascii
 ascii: encoder.exe decoder.exe x.bmp

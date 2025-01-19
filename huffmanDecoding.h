@@ -15,5 +15,6 @@ Node *createNode(int symbol);
 Node *buildHuffmanTreeFromCodebook(FILE *codebook);
 void decodeHuffmanTxt(Node *root, FILE *encodedFile, short **Y, short **Cb, short **Cr, long *pos_Y, long *pos_Cb, long *pos_Cr);
 void decodeHuffmanBin(Node *root, FILE *binFile, short **Y, short **Cb, short **Cr, long *pos_Y, long *pos_Cb, long *pos_Cr);
+void freeHuffmanTree(Node *root);
 
 #endif // HUFFMANDECODING_H

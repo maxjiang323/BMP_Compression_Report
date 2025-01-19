@@ -192,3 +192,15 @@ void decodeHuffmanBin(Node *root, FILE *binFile, short **Y, short **Cb, short **
         }
     }
 }
+
+// Function to free memory of the Huffman tree
+void freeHuffmanTree(Node *root) {
+    if (root == NULL) return;
+
+    // Recursively free left and right subtrees
+    freeHuffmanTree(root->left);
+    freeHuffmanTree(root->right);
+
+    // Free the current node
+    free(root);
+}
