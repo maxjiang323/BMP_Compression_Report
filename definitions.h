@@ -26,6 +26,7 @@ typedef struct {
     unsigned int importantcolors; // Number of important colors (0 = all colors are important)
 } Bmpheader;
 
+
 // pixeldata.h
 typedef struct {
     unsigned char R;
