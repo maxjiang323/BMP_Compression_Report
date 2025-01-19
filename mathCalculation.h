@@ -3,6 +3,7 @@
 
 #define W 8 // dimension of basis vector (width)
 #define H 8 // dimension of basis vector (height)
+
 // encoder.c
 void generate_basis_vector(float basis_vector[H][W][H][W]);
 void compute_2D_DCT(int height, int width, float **f, float ****F, float basis_vector[H][W][H][W]);
