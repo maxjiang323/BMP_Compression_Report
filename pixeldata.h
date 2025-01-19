@@ -2,7 +2,7 @@
 #define PIXELDATA_H
 
 #include <stdio.h>
-#include "headerInfo.h"
+#include "definitions.h"
 
 // encoder.c
 void read_rgb_data(FILE *fp, Bmpheader header, int *width, int *height, int *row_length, unsigned char **pix_rgb);

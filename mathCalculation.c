@@ -1,6 +1,10 @@
 #include <math.h>
 #include "mathCalculation.h"
 
+#define W 8 // dimension of basis vector (width)
+#define H 8 // dimension of basis vector (height)
+#define Pi 3.14159265359
+
 // Const quantization table 
 // Y channel
 const int Qt_Y[8][8] = {

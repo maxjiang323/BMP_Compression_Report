@@ -3,6 +3,10 @@
 #include <math.h>
 #include "pixeldata.h"
 
+#define W 8 // dimension of basis vector (width)
+#define H 8 // dimension of basis vector (height)
+
+
 // encoder.c
 void read_rgb_data(FILE *fp, Bmpheader header, int *width, int *height, int *row_length, unsigned char **pix_rgb){
     *width = header.width;  

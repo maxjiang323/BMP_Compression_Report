@@ -6,7 +6,7 @@
 #define Pi 3.14159265359
 
 
-// headerInfo.h
+// header Info of BMP file
 typedef struct {
     char identifier[2];           // BMP identifier, typically "BM"
     unsigned int filesize;        // Total size of the BMP file in bytes
