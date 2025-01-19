@@ -1,6 +1,12 @@
 #ifndef DEFINITIONS_H
 #define DEFINITIONS_H
 
+#define W 8 // dimension of basis vector (width)
+#define H 8 // dimension of basis vector (height)
+#define Pi 3.14159265359
+
+
+// headerInfo.h
 typedef struct {
     char identifier[2];           // BMP identifier, typically "BM"
     unsigned int filesize;        // Total size of the BMP file in bytes
@@ -19,5 +25,18 @@ typedef struct {
     unsigned int usedcolors;      // Number of colors used in the color palette (0 = all colors)
     unsigned int importantcolors; // Number of important colors (0 = all colors are important)
 } Bmpheader;
+
+// pixeldata.h
+typedef struct {
+    unsigned char R;
+    unsigned char G;
+    unsigned char B;
+} RGB;
+
+typedef struct {
+    float Y;
+    float Cb;
+    float Cr;
+} YCbCr;
 
 #endif // DEFINITIONS_H
