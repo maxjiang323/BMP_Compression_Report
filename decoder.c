@@ -8,9 +8,9 @@
 #include "testouput.h"
 #include "mathCalculation.h"
 
-#define W 8 // dimension of basis vector (width)
-#define H 8 // dimension of basis vector (height)
-#define Pi 3.14159265359
+// #define W 8 // dimension of basis vector (width)
+// #define H 8 // dimension of basis vector (height)
+// #define Pi 3.14159265359
 
 
 #define MAX_RANGE 512 // Total number of symbols including "0 0"

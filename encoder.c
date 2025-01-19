@@ -8,9 +8,9 @@
 #include "testouput.h"
 #include "mathCalculation.h"
 
-#define W 8 // dimension of basis vector (width)
-#define H 8 // dimension of basis vector (height)
-#define Pi 3.14159265359
+// #define W 8 // dimension of basis vector (width)
+// #define H 8 // dimension of basis vector (height)
+// #define Pi 3.14159265359
 
 
 void dpcm(int height, int width, short *****qF){
