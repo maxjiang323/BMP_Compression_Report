@@ -3,87 +3,11 @@
 #include <math.h>
 #include <stdint.h>
 #include <string.h>
+#include "headerInfo.h"
 
 #define W 8 // dimension of basis vector (width)
 #define H 8 // dimension of basis vector (height)
 #define Pi 3.14159265359
-
-typedef struct {
-    char identifier[2];           // BMP identifier, typically "BM"
-    unsigned int filesize;        // Total size of the BMP file in bytes
-    unsigned short reserved;      // Reserved, must be set to 0
-    unsigned short reserved2;     // Reserved, must be set to 0
-    unsigned int bitmap_dataoffset; // Offset to the start of pixel data
-    unsigned int bitmap_headersize; // Size of the DIB header (usually 40 bytes)
-    unsigned int width;           // Width of the image in pixels
-    unsigned int height;          // Height of the image in pixels
-    unsigned short planes;        // Number of color planes, must be 1
-    unsigned short bits_perpixel; // Bits per pixel (e.g., 1, 4, 8, 24)
-    unsigned int compression;     // Compression type (0 = none, 1 = RLE-8, etc.)
-    unsigned int bitmap_datasize; // Size of the bitmap data in bytes (may be 0 if uncompressed)
-    unsigned int hresolution;     // Horizontal resolution in pixels per meter
-    unsigned int vresolution;     // Vertical resolution in pixels per meter
-    unsigned int usedcolors;      // Number of colors used in the color palette (0 = all colors)
-    unsigned int importantcolors; // Number of important colors (0 = all colors are important)
-} Bmpheader;
-
-
-void read_dim(FILE *dim_txt, Bmpheader *header){
-    fscanf(dim_txt, 
-        "identifier: %c%c, filesize: %u, reserved: %hu, reserved2: %hu, "
-        "bitmap_dataoffset: %u, bitmap_headersize: %u, width: %u, height: %u, "
-        "planes: %hu, bits_perpixel: %hu, compression: %u, bitmap_datasize: %u, "
-        "hresolution: %u, vresolution: %u, usedcolors: %u, importantcolors: %u",
-        &header->identifier[0], &header->identifier[1],
-        &header->filesize,
-        &header->reserved, &header->reserved2,
-        &header->bitmap_dataoffset,
-        &header->bitmap_headersize,
-        &header->width, &header->height,
-        &header->planes, &header->bits_perpixel,
-        &header->compression, &header->bitmap_datasize,
-        &header->hresolution, &header->vresolution,
-        &header->usedcolors, &header->importantcolors); 
-}
-
-
-void readheader(FILE* fp, Bmpheader *header) {
-	fread(&header->identifier, sizeof(header->identifier), 1, fp);
-	fread(&header->filesize, sizeof(header->filesize), 1, fp);
-	fread(&header->reserved, sizeof(header->reserved), 1, fp);
-	fread(&header->reserved2, sizeof(header->reserved2), 1, fp);
-	fread(&header->bitmap_dataoffset, sizeof(header->bitmap_dataoffset), 1, fp);
-	fread(&header->bitmap_headersize, sizeof(header->bitmap_headersize), 1, fp);
-	fread(&header->width, sizeof(header->width), 1, fp);
-	fread(&header->height, sizeof(header->height), 1, fp);
-	fread(&header->planes, sizeof(header->planes), 1, fp);
-	fread(&header->bits_perpixel, sizeof(header->bits_perpixel), 1, fp);
-	fread(&header->compression, sizeof(header->compression), 1, fp);
-	fread(&header->bitmap_datasize, sizeof(header->bitmap_datasize), 1, fp);
-	fread(&header->hresolution, sizeof(header->hresolution), 1, fp);
-	fread(&header->vresolution, sizeof(header->vresolution), 1, fp);
-	fread(&header->usedcolors, sizeof(header->usedcolors), 1, fp);
-	fread(&header->importantcolors, sizeof(header->importantcolors), 1, fp);
-}
-
-void write_header(FILE* outf, Bmpheader header1){
-	fwrite(&header1.identifier, sizeof(char), 2, outf);
-	fwrite(&header1.filesize, sizeof(unsigned int), 1, outf);
-	fwrite(&header1.reserved, sizeof(unsigned short), 1, outf);
-	fwrite(&header1.reserved2, sizeof(unsigned short), 1, outf);
-	fwrite(&header1.bitmap_dataoffset, sizeof(unsigned int), 1, outf);
-	fwrite(&header1.bitmap_headersize, sizeof(unsigned int), 1, outf);
-	fwrite(&header1.width, sizeof(unsigned int), 1, outf);
-	fwrite(&header1.height, sizeof(unsigned int), 1, outf);
-	fwrite(&header1.planes, sizeof(unsigned short), 1, outf);
-	fwrite(&header1.bits_perpixel, sizeof(unsigned short), 1, outf);
-	fwrite(&header1.compression, sizeof(unsigned int), 1, outf);
-	fwrite(&header1.bitmap_datasize, sizeof(unsigned int), 1, outf);
-	fwrite(&header1.hresolution, sizeof(unsigned int), 1, outf);
-	fwrite(&header1.vresolution, sizeof(unsigned int), 1, outf);
-	fwrite(&header1.usedcolors, sizeof(unsigned int), 1, outf);
-	fwrite(&header1.importantcolors, sizeof(unsigned int), 1, outf);
-}
 
 
 #define MAX_RANGE 512 // Total number of symbols including "0 0"
