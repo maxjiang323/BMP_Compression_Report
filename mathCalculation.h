@@ -1,7 +1,6 @@
 #ifndef MATHCALCULATION_H
 #define MATHCALCULATION_H
 
-#include <math.h>
 #include "definitions.h"
 
 // encoder.c
