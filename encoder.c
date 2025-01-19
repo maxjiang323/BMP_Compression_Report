@@ -4,81 +4,12 @@
 #include <stdint.h>
 #include <string.h>
 #include "headerInfo.h"
+#include "pixeldata.h"
+#include "testouput.h"
 
 #define W 8 // dimension of basis vector (width)
 #define H 8 // dimension of basis vector (height)
 #define Pi 3.14159265359
-
-
-void read_rgb_data(FILE *fp, Bmpheader header, int *width, int *height, int *row_length, unsigned char **pix_rgb){
-    *width = header.width;  
-    *height = header.height;
-    int width_rgb = *width * 3;  // rgb -> *3
-    int padding = 4 - (width_rgb % 4);
-    if ((width_rgb % 4) == 0){
-        padding = 0;
-    }
-    *row_length = width_rgb + padding; 
-    // add the padding to make (the modified width, the length of a row) % 4 == 0
-    *pix_rgb = (unsigned char *)calloc((*row_length) * (*height), sizeof(unsigned char));
-
-    // read data
-    fseek(fp, header.bitmap_dataoffset, SEEK_SET); // jump to the start of pixel data  
-    fread(*pix_rgb, sizeof(unsigned char), (*row_length) * (*height), fp);
-}
-
-typedef struct {
-    float Y;
-    float Cb;
-    float Cr;
-} YCbCr;
-
-YCbCr RGB2YCbCr(unsigned char R, unsigned char G, unsigned char B) { // Rec. 709
-    YCbCr result;
-    result.Y = 0.2126 * R + 0.7152 * G + 0.0722 * B;
-    result.Cb = -0.1146 * R - 0.3854 * G + 0.5 * B;
-    result.Cr = 0.5 * R - 0.4542 * G - 0.0458 * B;
-    return result;
-}
-
-void put_RGB2YCbCr_into_block(int height, int width, int block_size, int row_length, unsigned char *pix_rgb, float ***f_Y, float ***f_Cb, float ***f_Cr){
-    // add FILE *en_f_Y to parameter if want to see the output
-    int rM = H - (height % H), rN = W - (width % W); // the remainder of the height and width
-    // may generate non-complete H*W block    
-    if (rM == H) rM = 0; // if the height is a multiple of H, no extra row is needed 
-    if (rN == W) rN = 0; // if the width is a multiple of W, no extra column is needed 
-
-    int block_x, block_y, x, y;
-    for (block_x = 0; block_x < height+rM; block_x += block_size) {
-        for (block_y = 0; block_y < width+rN; block_y += block_size) {
-            for (x = 0; x < block_size; x++) {
-                for (y = 0; y < block_size; y++) {
-                    int index = (block_x + x) * row_length + (block_y + y) * 3;
-                    // Check if we are within the image bounds
-                    if ((block_x + x) < height && (block_y + y) < width) {
-                        unsigned char b = pix_rgb[index];
-                        unsigned char g = pix_rgb[index + 1];
-                        unsigned char r = pix_rgb[index + 2];
-
-                        YCbCr result = RGB2YCbCr(r, g, b);
-
-                        (*f_Y)[block_x + x][block_y + y] = result.Y;
-                        (*f_Cb)[block_x + x][block_y + y] = result.Cb;
-                        (*f_Cr)[block_x + x][block_y + y] = result.Cr;
-                    } else {
-                            (*f_Y)[block_x + x][block_y + y] = 0.0;
-                            (*f_Cb)[block_x + x][block_y + y] = 0.0;
-                            (*f_Cr)[block_x + x][block_y + y] = 0.0;
-                    }
-
-                    // fprintf(en_f_Y, "%f ", (*f_Y)[block_x + x][block_y + y]);
-                }
-                // fprintf(en_f_Y, "\n");
-            }
-            // fprintf(en_f_Y, "\n\n");
-        }
-    }
-}
 
 
 // Const quantization table 
@@ -575,48 +506,6 @@ void write_hf_bin(short **rle_code, FILE *fp, char *codeTable[], long *pos, long
     bit_alignment(fp, codeTable[511], &(*byte), &(*temp), &(*bitCount), &(*byteCount));  // 0 0     
     (*pos) += 2; // skip end-of-block marker (0 0)
 
-}
-
-void test_output_of_dpcm(FILE *fp, int height, int width, short ****dpcm){
-    int rM = H - (height % H), rN = W - (width % W); // the remainder of the height and width
-    // may generate non-complete H*W block    
-    if (rM == H) rM = 0; // if the height is a multiple of H, no extra row is needed 
-    if (rN == W) rN = 0; // if the width is a multiple of W, no extra column is needed 
-    int M = (height+rM)/H;  // Number of blocks vertically
-    int N = (width+rN)/W;   // Number of blocks horizontally
-
-    int ind_H, ind_W, ind_M, ind_N; // index of H/W/M/N
-    for (ind_M = 0; ind_M < M; ind_M++) {
-        for (ind_N = 0; ind_N < N; ind_N++) {
-            for (ind_H = 0; ind_H < H; ind_H++) {
-                for (ind_W = 0; ind_W < W; ind_W++) {
-                    fprintf(fp, "%hd ", dpcm[ind_H][ind_W][ind_M][ind_N]);
-                }
-                fprintf(fp, "\n");
-            }
-            fprintf(fp, "\n\n");
-        }
-    }
-}
-
-void test_output_of_zz(FILE *fp, int height, int width, short ***output){
-    int rM = H - (height % H), rN = W - (width % W); // the remainder of the height and width
-    // may generate non-complete H*W block    
-    if (rM == H) rM = 0; // if the height is a multiple of H, no extra row is needed 
-    if (rN == W) rN = 0; // if the width is a multiple of W, no extra column is needed 
-    int M = (height+rM)/H;  // Number of blocks vertically
-    int N = (width+rN)/W;   // Number of blocks horizontally
-
-    int ind_H_W, ind_M, ind_N;
-    for (ind_M = 0; ind_M < M; ind_M++){
-        for (ind_N = 0; ind_N < N; ind_N++){
-            for (ind_H_W = 0; ind_H_W < 64; ind_H_W++){
-                fprintf(fp, "%hd ", output[ind_H_W][ind_M][ind_N]);
-            }
-            fprintf(fp, "\n");
-        }
-        fprintf(fp, "\n\n");
-    }
 }
 
 

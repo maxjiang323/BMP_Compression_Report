@@ -1,7 +1,7 @@
 # build
 build: encoder.c decoder.c
-	gcc encoder.c headerInfo.c -o encoder.exe -lm
-	gcc decoder.c headerInfo.c -o decoder.exe -lm
+	gcc encoder.c headerInfo.c pixeldata.c testouput.c -o encoder.exe -lm
+	gcc decoder.c headerInfo.c pixeldata.c testouput.c -o decoder.exe -lm
 
 # ascii
 ascii: encoder.exe decoder.exe x.bmp
