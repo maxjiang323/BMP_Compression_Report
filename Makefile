@@ -1,7 +1,18 @@
 # build
+SOURCES_ENCODER = sources/headerInfo.c sources/pixeldata.c \
+                  sources/testouput.c sources/mathCalculation.c \
+                  sources/sort.c sources/runLengthCoding.c \
+                  sources/huffmanEncoding.c sources/encoderMemory.c
+
+SOURCES_DECODER = sources/headerInfo.c sources/pixeldata.c \
+                  sources/testouput.c sources/mathCalculation.c \
+                  sources/sort.c sources/runLengthCoding.c \
+                  sources/huffmanDecoding.c sources/decoderMemory.c
+
 build: encoder.c decoder.c
-	gcc encoder.c headerInfo.c pixeldata.c testouput.c mathCalculation.c sort.c runLengthCoding.c huffmanEncoding.c encoderMemory.c -o encoder.exe -lm
-	gcc decoder.c headerInfo.c pixeldata.c testouput.c mathCalculation.c sort.c runLengthCoding.c huffmanDecoding.c decoderMemory.c -o decoder.exe -lm
+	gcc encoder.c $(SOURCES_ENCODER) -o encoder.exe -lm -Iheaders
+	gcc decoder.c $(SOURCES_DECODER) -o decoder.exe -lm -Iheaders
+
 
 # ascii
 ascii: encoder.exe decoder.exe x.bmp
@@ -16,3 +27,5 @@ binary: encoder.exe decoder.exe x.bmp
 # clean
 clean:
 	rm -f *.txt *.exe QRes*.bmp *.bin
+
+.PHONY: build ascii binary clean
