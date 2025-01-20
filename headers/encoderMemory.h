@@ -1,7 +1,7 @@
 #ifndef ENCODERMEMORY_H
 #define ENCODERMEMORY_H
 
-#include "definitions.h"
+#include "headers/definitions.h"
 
 // allocate memory
 void calloc_f(int h, int w, float ***f);

@@ -2,7 +2,7 @@
 #define HEADERINFO_H
 
 #include <stdio.h>
-#include "definitions.h"
+#include "headers/definitions.h"
 
 void read_dim(FILE *dim_txt, Bmpheader *header);
 void write_dim(FILE *fp, Bmpheader header);

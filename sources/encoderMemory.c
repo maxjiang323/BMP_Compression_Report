@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "encoderMemory.h"
+#include "headers/encoderMemory.h"
 
 // allocate memory
 void calloc_f(int h, int w, float ***f){

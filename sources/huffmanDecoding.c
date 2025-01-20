@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "huffmanDecoding.h"
+#include "headers/huffmanDecoding.h"
 
 // Function to create a new node
 Node *createNode(int symbol) {

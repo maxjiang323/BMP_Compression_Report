@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "headerInfo.h"
+#include "headers/headerInfo.h"
 
 void read_dim(FILE *dim_txt, Bmpheader *header){
     fscanf(dim_txt, 

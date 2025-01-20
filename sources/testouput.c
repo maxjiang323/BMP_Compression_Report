@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "testouput.h"
+#include "headers/testouput.h"
 
 // encoder.c
 void test_output_of_dpcm(FILE *fp, int height, int width, short ****dpcm){

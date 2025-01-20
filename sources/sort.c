@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "sort.h"
+#include "headers/sort.h"
 
 #define W 8 // dimension of basis vector (width)
 #define H 8 // dimension of basis vector (height)

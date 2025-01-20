@@ -2,7 +2,7 @@
 #define TESTOUT_H
 
 #include <stdio.h>
-#include "definitions.h"
+#include "headers/definitions.h"
 
 // encoder.c
 void test_output_of_dpcm(FILE *fp, int height, int width, short ****dpcm);
