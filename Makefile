@@ -1,4 +1,8 @@
 # build
+
+CC = gcc 
+CFLAGS = -lm -Iheaders
+
 SOURCES_ENCODER = sources/headerInfo.c sources/pixeldata.c \
                   sources/testouput.c sources/mathCalculation.c \
                   sources/sort.c sources/runLengthCoding.c \
@@ -10,8 +14,11 @@ SOURCES_DECODER = sources/headerInfo.c sources/pixeldata.c \
                   sources/huffmanDecoding.c sources/decoderMemory.c
 
 build: encoder.c decoder.c
-	gcc encoder.c $(SOURCES_ENCODER) -o encoder.exe -lm -Iheaders
-	gcc decoder.c $(SOURCES_DECODER) -o decoder.exe -lm -Iheaders
+	@$(CC) encoder.c $(SOURCES_ENCODER) -o encoder.exe $(CFLAGS)
+	@echo "gcc encoder.c (SOURCES_ENCODER) -o encoder.exe -lm -Iheaders"
+
+	@$(CC) decoder.c $(SOURCES_DECODER) -o decoder.exe $(CFLAGS)
+	@echo "gcc decoder.c (SOURCES_DECODER) -o decoder.exe -lm -Iheaders"
 
 
 # ascii
