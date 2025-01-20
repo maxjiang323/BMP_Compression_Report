@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "headers/decoderMemory.h"
+#include "decoderMemory.h"
 
 void malloc_zz(int M, int N, short ****zz){
     *zz = (short ***)malloc(M * sizeof(short **));

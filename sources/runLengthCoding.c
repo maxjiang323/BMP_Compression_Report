@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "headers/runLengthCoding.h"
+#include "runLengthCoding.h"
 
 // encoder.c
 void run_length_encoding(int height, int width, short ***zz, short **rle_code, long *size) {

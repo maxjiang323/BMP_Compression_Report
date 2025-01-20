@@ -1,5 +1,5 @@
 #include <math.h>
-#include "headers/mathCalculation.h"
+#include "mathCalculation.h"
 
 #define W 8 // dimension of basis vector (width)
 #define H 8 // dimension of basis vector (height)

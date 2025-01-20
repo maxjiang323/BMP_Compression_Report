@@ -1,7 +1,7 @@
 #ifndef HUFFMANENCODING_H
 #define HUFFMANENCODING_H
 
-#include "headers/definitions.h"
+#include "definitions.h"
 #define MAX_RANGE 512 // -255 to 255 + one extra symbol for "0 0"
 
 // Define the node structure for the Huffman tree

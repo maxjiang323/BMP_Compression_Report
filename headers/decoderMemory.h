@@ -1,7 +1,7 @@
 #ifndef DECODERMEMORY_H
 #define DECODERMEMORY_H
 
-#include "headers/definitions.h"
+#include "definitions.h"
 
 // allocate memory
 void malloc_zz(int M, int N, short ****zz);

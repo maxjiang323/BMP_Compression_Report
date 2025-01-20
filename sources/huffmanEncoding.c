@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "headers/huffmanEncoding.h"
+#include "huffmanEncoding.h"
 
 // Create a new node
 Node *createNode(int value, int symbol, Node *left, Node *right) {

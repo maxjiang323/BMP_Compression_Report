@@ -3,14 +3,14 @@
 #include <math.h>
 #include <stdint.h>
 #include <string.h>
-#include "headers/headerInfo.h"
-#include "headers/pixeldata.h"
-#include "headers/testouput.h"
-#include "headers/mathCalculation.h"
-#include "headers/sort.h"
-#include "headers/runLengthCoding.h"
-#include "headers/huffmanEncoding.h"
-#include "headers/encoderMemory.h"
+#include "headerInfo.h"
+#include "pixeldata.h"
+#include "testouput.h"
+#include "mathCalculation.h"
+#include "sort.h"
+#include "runLengthCoding.h"
+#include "huffmanEncoding.h"
+#include "encoderMemory.h"
 
 // #define W 8 // dimension of basis vector (width)
 // #define H 8 // dimension of basis vector (height)
