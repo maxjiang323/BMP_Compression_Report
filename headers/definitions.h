@@ -1,3 +1,26 @@
+/*
+Portions of this code are from ntpu-ce-mmsp-2023
+Source: https://github.com/cychiang-ntpu/ntpu-ce-mmsp-2023
+Copyright 2004 Chen-Yu Chiang
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+Modifications made on 2025/01/19 by Ming Ju Chiang:
+- Changed the structure name from `Bmpheader` to `Bmpheader` (for consistency).
+- Updated field comments for better clarity and understanding.
+- Removed the `palette` field as it is unused in this implementation.
+*/
+
+
 #ifndef DEFINITIONS_H
 #define DEFINITIONS_H
 
@@ -5,7 +28,7 @@
 #define H 8 // dimension of basis vector (height)
 #define Pi 3.14159265359
 
-
+// Modified version of the original `Bmpheader` structure from ntpu-ce-mmsp-2023
 // header Info of BMP file
 typedef struct {
     char identifier[2];           // BMP identifier, typically "BM"

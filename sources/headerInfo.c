@@ -1,3 +1,18 @@
+/*
+This file is part of the ntpu-ce-mmsp-2023
+Original Author: Chen-Yu Chiang
+License: Apache 2.0
+
+Modifications made by Ming Ju Chiang on 2025/01/19:
+- Refactored and extended the original code to implement functions for reading and writing BMP headers.
+- Modified the original `output_bmp` function, renaming it to `write_header` and separating header writing logic.
+- modified the `readheader` function in ntpu-ce-mmsp-2023, updated parameter type from `Bitmap*` to `Bmpheader*` and 
+  renamed parameter from `x` to `header`. 
+
+https://github.com/cychiang-ntpu/ntpu-ce-mmsp-2023 - For more details and the full original code.
+ */
+
+
 #include <stdio.h>
 #include "headerInfo.h"
 
@@ -37,6 +52,12 @@ void write_dim(FILE *fp, Bmpheader header){
         header.usedcolors, header.importantcolors);
 }
 
+/*
+Modified version of the `readheader` function from ntpu-ce-mmsp-2023.
+Changes:
+- Updated parameter type from `Bitmap*` to `Bmpheader*`.
+- Renamed parameter from `x` to `header`.
+*/
 void readheader(FILE* fp, Bmpheader *header) {
 	fread(&header->identifier, sizeof(header->identifier), 1, fp);
 	fread(&header->filesize, sizeof(header->filesize), 1, fp);
@@ -56,6 +77,16 @@ void readheader(FILE* fp, Bmpheader *header) {
 	fread(&header->importantcolors, sizeof(header->importantcolors), 1, fp);
 }
 
+/*
+Modified version of the `output_bmp` function from ntpu-ce-mmsp-2023.
+Changes:
+- Refactored and renamed from the original `output_bmp` function.
+- Updated parameter type from `Bitmap*` to `Bmpheader*`.
+- This function now only handles the header writing logic, leaving the image data handling to other parts of the program.
+- Modify the size and count of elements written for header1.identifier.
+- Renamed parameter from `bmpheader` to `header1`.
+- Renamed parameter from `outfile` to `outf`.
+ */
 void write_header(FILE* outf, Bmpheader header1){
 	fwrite(&header1.identifier, sizeof(char), 2, outf);
 	fwrite(&header1.filesize, sizeof(unsigned int), 1, outf);
