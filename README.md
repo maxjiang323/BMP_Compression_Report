@@ -1,5 +1,4 @@
 # BMP 檔案壓縮專案-程式使用方法
-專案程式連結：https://github.com/maxjiang323/BMP_Compression_Report
 本專案使用 Makefile 以結構化的方式管理程式的編譯與執行。下面以 Makefile 中的 make 指令進行分點說明
 
 ## 1. make build
@@ -46,7 +45,7 @@
 - QResb_x.bmp：使用 Binary 方式儲存的 huffman_code.bin 及  codebook.txt 還原的 BMP 檔案。
 
 
-## 5. make clean
+## 4. make clean
 內容如下：
 ```
 rm -f *.txt *.exe QRes*.bmp *.bin
