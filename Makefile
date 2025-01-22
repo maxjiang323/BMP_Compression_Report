@@ -6,7 +6,8 @@ CFLAGS = -lm -Iheaders
 SOURCES_ENCODER = sources/headerInfo.c sources/pixeldata.c \
                   sources/testouput.c sources/mathCalculation.c \
                   sources/sort.c sources/runLengthCoding.c \
-                  sources/huffmanEncoding.c sources/encoderMemory.c
+                  sources/huffmanEncoding.c sources/encoderMemory.c \
+				  sources/SQNR.c
 
 SOURCES_DECODER = sources/headerInfo.c sources/pixeldata.c \
                   sources/testouput.c sources/mathCalculation.c \
@@ -23,12 +24,12 @@ build: encoder.c decoder.c
 
 # ascii
 ascii: encoder.exe decoder.exe x.bmp
-	./encoder.exe x.bmp ascii codebook.txt huffman_code.txt
+	./encoder.exe x.bmp ascii codebook.txt huffman_code.txt SQNR_a.txt
 	./decoder.exe QResa_x.bmp ascii codebook.txt huffman_code.txt 
 
 # binary
 binary: encoder.exe decoder.exe x.bmp
-	./encoder.exe x.bmp binary codebook.txt huffman_code.bin 
+	./encoder.exe x.bmp binary codebook.txt huffman_code.bin SQNR_b.txt
 	./decoder.exe QResb_x.bmp binary codebook.txt huffman_code.bin 
 
 # clean
