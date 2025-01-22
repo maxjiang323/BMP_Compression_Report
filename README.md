@@ -46,7 +46,7 @@
 - QResb_x.bmp：使用Binary方式儲存的huffman_code.bin及 codebook.txt還原的 BMP 檔案。
 
 
-## 5. make clean
+## 4. make clean
 內容如下：
 ```
 rm -f *.txt *.exe QRes*.bmp *.bin
