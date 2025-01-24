@@ -11,7 +11,6 @@
 #include "runLengthCoding.h"
 #include "huffmanEncoding.h"
 #include "encoderMemory.h"
-#include "SQNR.h"
 
 // #define W 8 // dimension of basis vector (width)
 // #define H 8 // dimension of basis vector (height)
@@ -78,29 +77,6 @@ int main(int argc, char *argv[]){
     malloc_qF(M, N, &qF_Cb);
     malloc_qF(M, N, &qF_Cr);
 
-    // calculate Ps and Pe for each (8x8) block in Y, Cb, Cr channel to calculate SQNR
-    // and save SQNR of Y, Cb, Cr channel to SQNR.txt
-    // SQNR = 10 * log(Ps/Pe)
-    float Ps_Y[H][W] = {0}, Ps_Cb[H][W] = {0}, Ps_Cr[H][W] = {0};
-    float Pe_Y[H][W] = {0}, Pe_Cb[H][W] = {0}, Pe_Cr[H][W] = {0};
-
-    FILE *sqnr_txt = fopen(argv[5], "w");
-    calculate_Ps_Pe(height, width, Ps_Y, Pe_Y, F_Y, 'Y');
-    calculate_Ps_Pe(height, width, Ps_Cb, Pe_Cb, F_Cb, 'C');
-    calculate_Ps_Pe(height, width, Ps_Cr, Pe_Cr, F_Cr, 'C');
-
-    float sqnr_Y[H][W] = {0};
-    float sqnr_Cb[H][W] = {0}; 
-    float sqnr_Cr[H][W] = {0};
-    fprintf(sqnr_txt, "SQNR of Y channel: \n");
-    write_SQNR(sqnr_txt, sqnr_Y, Ps_Y, Pe_Y);
-
-    fprintf(sqnr_txt, "SQNR of Cb channel: \n");
-    write_SQNR(sqnr_txt, sqnr_Cb, Ps_Cb, Pe_Cb);
-
-    fprintf(sqnr_txt, "SQNR of Cr channel: \n");
-    write_SQNR(sqnr_txt, sqnr_Cr, Ps_Cr, Pe_Cr);
-    fclose(sqnr_txt);
 
     // perform quantization
     quantization(height, width, &qF_Y, F_Y, 'Y');
