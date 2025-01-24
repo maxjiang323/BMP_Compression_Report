@@ -27,7 +27,7 @@
 - huffman_code.txt: 以 ASCII 方式儲存資料，包含：
     - 圖片的 header 資訊。
     - Symbol串（string）對應的 bitstream，就是Y, Cb, Cr三個頻道（channel）中數值對應的 Huffman 編碼。
--  SQNR_a.txt：以 ASCII 方式儲存 Y, Cb, Cr三個頻道的 8x8 的區塊（block）的 SQNR 數值。     
+-  SQNR_a.txt：以 ASCII 方式儲存 Y, Cb, Cr三個頻道的 8x8 的區塊（block）的 SQNR 數值，每個頻道共有 8x8 = 64 個 SQNR 數值。       
 - QResa_x.bmp：使用 ASCII 方式儲存的 huffman_code.txt 及    codebook.txt 還原的 BMP 檔案。
 
 ## 3. make binary
@@ -44,7 +44,7 @@
 - huffman_code.bin: 以 Binary 方式儲存資料，包含：
     - 圖片的 header 資訊。
     - Symbol 串對應的 bitstream，也就是Y, Cb, Cr三個頻道中數值對應的 Huffman 編碼。
--  SQNR_b.txt：以 ASCII 方式儲存 Y, Cb, Cr三個頻道的 8x8 的區塊（block）的 SQNR 數值。  
+-  SQNR_b.txt：以 ASCII 方式儲存 Y, Cb, Cr三個頻道的 8x8 的區塊（block）的 SQNR 數值，每個頻道共有 8x8 = 64 個 SQNR 數值。  
 - QResb_x.bmp：使用 Binary 方式儲存的 huffman_code.bin 及  codebook.txt 還原的 BMP 檔案。
 
 
