@@ -1,4 +1,5 @@
 # BMP 檔案壓縮專案-程式使用方法 (BMP Compression Report-Usage)
+- 作者（Author）：姜名孺（Ming-Ju Chiang）
 - This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
 - 本專案使用 Makefile 以結構化的方式管理程式的編譯與執行。下面以 Makefile 中的 make 指令進行分點說明
 
